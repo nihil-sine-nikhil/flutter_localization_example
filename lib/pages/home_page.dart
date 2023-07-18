@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../classes/language.dart';
 import '../../router/route_constants.dart';
-// TODO: Need to import language constants
+import '../main.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -24,7 +25,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Home Page"),
+        title: Text(AppLocalizations.of(context)!.homePage),
         actions: <Widget>[
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -35,7 +36,9 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.white,
               ),
               onChanged: (Language? language) {
-                // TODO: to call change language method
+                if (language != null) {
+                  MyApp.setLocale(context, Locale(language.languageCode));
+                }
               },
               items: Language.languageList()
                   .map<DropdownMenuItem<Language>>(
@@ -126,7 +129,6 @@ class _HomePageState extends State<HomePage> {
             onTap: () async {
               FocusScope.of(context).requestFocus(FocusNode());
               await showDatePicker(
-                locale: Locale("fr"),
                 context: context,
                 initialDate: DateTime.now(),
                 firstDate: DateTime(DateTime.now().year),
