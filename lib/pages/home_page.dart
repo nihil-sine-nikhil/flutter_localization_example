@@ -126,6 +126,7 @@ class _HomePageState extends State<HomePage> {
             onTap: () async {
               FocusScope.of(context).requestFocus(FocusNode());
               await showDatePicker(
+                locale: Locale("fr"),
                 context: context,
                 initialDate: DateTime.now(),
                 firstDate: DateTime(DateTime.now().year),

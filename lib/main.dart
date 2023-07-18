@@ -35,6 +35,7 @@ class _MyAppState extends State<MyApp> {
         Locale('fa'), // Spanish
         Locale('hi'), // Spanish
       ],
+      // locale: Locale('ar'),
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
