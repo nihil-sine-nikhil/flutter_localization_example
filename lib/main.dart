@@ -3,6 +3,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:localization_example/router/custom_router.dart';
 import 'package:localization_example/router/route_constants.dart';
 
+import 'classes/language_constants.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -22,10 +24,16 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   Locale? _locale;
 
-  setLocale(Locale newLocale) {
+  setLocale(Locale locale) {
     setState(() {
-      _locale = newLocale;
+      _locale = locale;
     });
+  }
+
+  @override
+  void didChangeDependencies() {
+    getLocale().then((locale) => {setLocale(locale)});
+    super.didChangeDependencies();
   }
 
   @override
@@ -33,15 +41,14 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Localization',
       debugShowCheckedModeBanner: false,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      locale: _locale,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      // TODO: implement localizations
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       onGenerateRoute: CustomRouter.generatedRoute,
       initialRoute: homeRoute,
+      locale: _locale,
     );
   }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../classes/language_constants.dart';
+
 class AboutPage extends StatefulWidget {
   const AboutPage({Key? key}) : super(key: key);
 
@@ -12,12 +14,12 @@ class _AboutPageState extends State<AboutPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("About Us"),
+        title: Text(translation(context).aboutUs),
       ),
       body: Container(
         padding: const EdgeInsets.all(20),
         child: Center(
-          child: Text("Here is the about "),
+          child: Text(translation(context).about),
         ),
       ),
     );
